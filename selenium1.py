@@ -1,30 +1,27 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+import chromedriver_binary
+import time
 
-URL = 'http://facebook.com'
-# initialize browser
-browser = webdriver.Chrome()
+URL = 'https://www.linkedin.com/checkpoint/rm/sign-in-another-account'
+options = Options()
+options.add_argument('--headless')
+##options.add_argument('--disable-gpu')  # Last I checked this was necessary.
+print("browser Starting..")
+browser = webdriver.Chrome(executable_path=chromedriver_binary.chromedriver_filename,
+                           options = options)
+print("browser Started.")
 
-# open browser with url
 browser.get(URL)
-assert 'Facebook' in browser.title
-
-# login
-email_input = browser.find_element_by_css_selector('input#email')
-password_input = browser.find_element_by_xpath('//input[@name="pass"]')
-login_button = browser.find_element(By.CSS_SELECTOR, 'input[type=submit]')
-
-email_input.send_keys('denis.zvezdov')
-password_input.send_keys('wrong_password')
-login_button.click()
-
-# verify that we are still on login page
-assert 'Log into Facebook' in browser.title
-#browser.quit()
-
-
-
-
-
-
-
+time.sleep(5)
+print("browser Started url fetshed!.\n")
+body = browser.find_element(By.CSS_SELECTOR , "body")
+username = browser.find_element(By.ID,"username")
+username.send_keys("saffirAsad@gmail.com");
+password = browser.find_element(By.ID,"password")
+password.send_keys("");
+time.sleep(5)
+body.screenshot("a.png")
+time.sleep(5)
+browser.close()
