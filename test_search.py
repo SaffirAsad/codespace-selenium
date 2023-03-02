@@ -1,6 +1,6 @@
 import unittest
 
-import yaml
+import yaml 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -32,7 +32,7 @@ class TestSearch(unittest.TestCase):
                 EC.visibility_of_all_elements_located(
                     (By.XPATH, page.locators['search_results'])))
         except TimeoutException:
-            pass
+            pass 
         options[0].click()
 
         self.assertTrue(Product(self.browser, 'Black Nolita Cami').is_visible)
